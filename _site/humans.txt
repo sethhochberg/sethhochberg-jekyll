@@ -1,0 +1,4 @@
+/* the humans responsible & colophon */
+/* humanstxt.org */
+
+Seth Hochberg (sethhochberg.com) modified this Jekyll build based on the work by Yoosuf Muhammad (eyoosuf.com) and Rifakath Mohamed (rifakath.com).

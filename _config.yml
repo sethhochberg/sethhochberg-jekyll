@@ -1,0 +1,35 @@
+exclude:  [ Gemfile, Gemfile.lock, Procfile, vendor, gems]
+
+sitename:  Seth Hochberg
+tagline: Computers, music, and other fun things
+
+production_url : http://www.sethhochberg.com
+url: http://www.sethhochberg.com
+
+safe:        false
+auto:        false
+baseurl:    /
+
+
+future:      false
+pygments:    true
+markdown:    maruku
+permalink:   /blog/:year/:month/:day/:title/
+
+
+
+
+navigation:
+- text: Home
+  url: /
+  layout: default  
+- text: About Me
+  url: /about/
+  layout: page  
+- text: Projects and Blog
+  url: /blog/
+  layout: archive
+
+
+
+

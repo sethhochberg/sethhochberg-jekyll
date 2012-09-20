@@ -1,0 +1,225 @@
+<!doctype html>
+<html itemscope itemtype="http://schema.org/Organization" lang="en">
+		<meta charset="utf-8"/>
+
+
+		<title>Computers, music, and other fun things - USB RNDIS Modem as WAN on Tomato Firmware - Seth Hochberg</title>
+		<meta name="description" content="Computers, music, and other fun things"/>
+
+
+
+		<meta name="keywords" content="web design, web application development, UI design, CSS, XHTML, web standards, small business web design, web design consultancy, Magpie Lab"/>
+		<meta name="robots" content="noodp" />
+		
+		<link rel="canonical" href="http://www.sethhochberg.com"/>
+		<!--[if lt IE 9]>
+			<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+		<![endif]-->
+
+		<link rel="stylesheet" media="all" href="/static/css/style.css"/>	
+		<meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+	</head>
+
+	
+	<body class="url_blog_2012_07_12_RNDIS_As_WAN_Tomato_ layout_post">	
+
+		<div id="wrapper">
+			<header id="header">
+				<div class="inner">
+
+					<div id="site-name">Seth Hochberg</div>
+
+
+
+				<nav id="navigation">
+
+
+
+					
+					  <ul class="navigation">
+					    
+					      
+					      
+
+					      <li class="first ">
+					        <a class="" href="/">Home</a>
+					      </li>
+					    
+					      
+					      
+
+					      <li class=" ">
+					        <a class="" href="/about/">About Me</a>
+					      </li>
+					    
+					      
+					      
+
+					      <li class=" last">
+					        <a class="" href="/blog/">Projects and Blog</a>
+					      </li>
+					    
+					    <li><a data-toggle="modal" data-controls-modal="modal" data-backdrop="fade" href="#contact">Contact Me</a></li>
+
+
+					  </ul>
+					
+
+				</nav>
+
+				</div>
+			</header>
+
+
+			<div id="main">
+				<div class="inner">
+
+
+
+
+ 
+<div id="primary" role="main">  
+
+
+	<article class="post">
+
+		<header class="post-header">
+			<h1 class="post-title">USB RNDIS Modem as WAN on Tomato Firmware</h1>
+		</header><!-- .post-title -->
+		<div class="post-meta">
+			<time class="date" datetime="2012-07-12T00:00:00-07:00">12 July 2012</time>
+			<cite><em>by</em> Seth</cite>
+		</div><!-- .post-meta -->
+		<div class="post-content">
+			<p>I recently ran into a situation where it was desirable for me to be able to plug my Clear Clearstick Atlas (a plug-and-play USB WiMax modem) into the USB port on my router and use it as the internet connection for all the devices on my network. Below is how I accomplished this task using my Netgear WNR3500L router, running the &#8230;. build of the awesome Tomato router firmware.</p>
+
+<p>First, I set up the Clearstick in it&#8217;s NAT operation mode, rather than IP passthrough. This let me use the Clearstick as a traditional modem, where the modem assigns an IP address to the router via DHCP. In the Clearstick&#8217;s configuration:</p>
+
+<p>Modem IP: 192.168.1.10 (for the Clearstick)<br />Host IP: 192.168.1.40 (for the router)</p>
+
+<p>A few kernel modules are required to get the Clearstick recognized by the router. You&#8217;ll need the following files:</p>
+
+<p>mii.ko<br />usbnet.ko<br />cdc_ether.ko<br />rndis_host.ko</p>
+
+<p>You can get these from the &#8220;extras-mips&#8221; tarballs from whatever the lastest build available is here: <a href='http://tomato.groov.pl/download/K26/'>Shibby&#8217;s Tomato Site</a></p>
+
+<p>The best place to put these files is in the router&#8217;s JFFS partition, so they&#8217;re available to you even after reboots of the hardware. Google around for a tutorial on setting that up, there are plenty available.</p>
+
+<p>Once you&#8217;ve got the kernel modules onto the router, insert them in the order they are listed above like so:</p>
+
+<p>$ insmod mii.ko<br />$ insmod usbnet.ko</p>
+
+<p>&#8230;etc&#8230;</p>
+
+<p>After that is done, check to see that all the right modules are loaded:</p>
+
+<p>$ lsmod</p>
+
+<p>If everything looks good there, plug in the Clearstick, wait for it to indicate that it has a signal, and then check to make sure you have a new network interface available. Make note of what the network interface is (for me, the new CDC_Ether device was eth2)</p>
+
+<p>$ dmesg</p>
+
+<p>When we&#8217;ve got the interface name, now we just need to bring the interface up, have the router request an IP via DHCP from the modem, add the modem to the default bridge (so our other interfaces can talk to it), and make sure we route all outbound traffic through the modem. Use these commands. Substitute your interface name for eth2 and the modem&#8217;s IP for 192.168.1.10.</p>
+
+<p>$ ifconfig eth2 up<br />$ udhcpc -i eth2<br />$ brctl addif br0 eth2<br />$ route add default gw 192.168.1.10</p>
+
+<p>In the router&#8217;s configuration menu, set the DNS servers to 8.8.8.8 and 8.8.4.4 - this isn&#8217;t really required, but I&#8217;d rather use Google&#8217;s DNS than Clearwire&#8217;s.</p>
+		</div><!-- .post-content -->
+		<footer class="post-footer">
+
+		</footer><!-- .post-footer -->
+	</article><!-- .post -->
+
+	<div class="comments">
+
+
+		<div class="fb-comments" data-href="http://www.sethhochberg.com/blog/2012/07/12/RNDIS_As_WAN_Tomato/" data-num-posts="2" data-width="620"></div>
+
+		<!--
+	<div class="fb-like" data-href="my.domain.com" data-layout="standard" data-send="false" data-width="255" data-show-faces="false" data-action="recommend" data-font="verdana"></div>
+-->
+	</div>
+
+
+	<nav class="pagenation">
+		<ul>
+			
+				<li class="before left"><a rel="prev" href="/blog/2012/07/10/FFilter/" title="View FFilter - A simple Python script for spectral filtering of audio files">&laquo; Previous</a></li>
+			
+			
+		</ul>
+	</nav>
+
+	<!--
+	<div id="related" class="clear">
+	  <h2>Related Posts</h2>
+	  <ul class="posts">
+	    
+	      <li><span>10 Jul 2012</span> &raquo; <a href="/blog/2012/07/10/FFilter/">FFilter - A simple Python script for spectral filtering of audio files</a></li>
+	    
+	      <li><span>20 Jun 2012</span> &raquo; <a href="/blog/2012/06/20/Boosterworks/">BoosterWorks - A Volunteer Scheduling System</a></li>
+	    
+	  </ul>
+	</div>
+	-->
+
+
+</div>
+
+
+
+ 				</div>
+			</div>
+
+
+			
+			<footer id="footer">
+				<div class="inner">
+
+				</div>
+			</footer>
+		</div>	
+
+
+
+
+
+
+          <div id="contact" class="modal hide fade">
+            <div class="modal-header">
+              <a class="close" data-dismiss="modal">&times;</a>
+              <h3>Get in touch</h3>
+            </div>
+            <div class="modal-body">
+              <p>There was no sense putting a complicated contact form here, so just shoot me an email to <a href="mailto:seth@sethhochberg.com">seth@sethhochberg.com</a>.</p>
+
+            </div>
+
+          </div>
+
+
+
+
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<script type="text/javascript" src="/static/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="/static/js/script.js"></script>
+
+	<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-20896088-2']);
+  _gaq.push(['_setDomainName', 'sethhochberg.com']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+	</body>
+</html>
+
+
