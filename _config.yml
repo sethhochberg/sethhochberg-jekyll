@@ -1,7 +1,7 @@
 exclude:  [ Gemfile, Gemfile.lock, Procfile, vendor, gems]
 
 sitename:  Seth Hochberg
-tagline: Computers, music, and other fun things
+tagline: Computers, music, electronics, and other fun things
 
 production_url : http://www.sethhochberg.com
 url: http://www.sethhochberg.com
@@ -25,7 +25,10 @@ navigation:
   layout: default  
 - text: About Me
   url: /about/
-  layout: page  
+  layout: page
+- text: Portfolio
+  url: /portfolio/
+  layout: page
 - text: Projects and Blog
   url: /blog/
   layout: archive

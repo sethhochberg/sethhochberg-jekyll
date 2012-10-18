@@ -7,6 +7,8 @@ title: BoosterWorks - A Volunteer Scheduling System
 About:
 ---
 
+(This post references an old version of Boosterworks - a complete rewrite of the software, using Ruby on Rails, is underway prior to a real public launch as a SaaS product.)
+
 BoosterWorks is a piece of software that is designed to help parent booster organizations schedule volunteers for their events more efficiently, while increasing accountability and reducing event coordinator workloads. Currently, BoosterWorks is entering its second year of use with the Tarpon Springs High School Band Boosters.
 
 The program is free (both to use and to build upon) and will run on just about any web server with a recent version of PHP (5.x or higher) and a database server like MySQL or PostgreSQL.

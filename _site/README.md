@@ -1,9 +1,3 @@
-Magpie Lab website source
-===
-
-
-
-
 Install the Jekyll
 
 $ sudo gem install jekyll

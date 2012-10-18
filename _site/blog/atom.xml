@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
  
- <title>Seth Hochberg | Computers, music, and other fun things</title>
+ <title>Seth Hochberg | Computers, music, electronics, and other fun things</title>
  <link href="http://www.sethhochberg.com/atom.xml" rel="self"/>
  <link href="http://www.sethhochberg.com"/>
- <updated>2012-07-12T16:45:56-07:00</updated>
+ <updated>2012-10-17T21:38:22-04:00</updated>
  <id>http://layouts.studiomohawk.com/</id>
 
  
  <entry>
    <title>USB RNDIS Modem as WAN on Tomato Firmware</title>
    <link href="http://www.sethhochberg.com/blog/2012/07/12/RNDIS_As_WAN_Tomato/"/>
-   <updated>2012-07-12T00:00:00-07:00</updated>
+   <updated>2012-07-12T00:00:00-04:00</updated>
    <id>http://www.sethhochberg.com/blog/2012/07/12/RNDIS_As_WAN_Tomato</id>
    <content type="html">&lt;p&gt;I recently ran into a situation where it was desirable for me to be able to plug my Clear Clearstick Atlas (a plug-and-play USB WiMax modem) into the USB port on my router and use it as the internet connection for all the devices on my network. Below is how I accomplished this task using my Netgear WNR3500L router, running the &amp;#8230;. build of the awesome Tomato router firmware.&lt;/p&gt;
 
@@ -51,7 +51,7 @@
  <entry>
    <title>FFilter - A simple Python script for spectral filtering of audio files</title>
    <link href="http://www.sethhochberg.com/blog/2012/07/10/FFilter/"/>
-   <updated>2012-07-10T00:00:00-07:00</updated>
+   <updated>2012-07-10T00:00:00-04:00</updated>
    <id>http://www.sethhochberg.com/blog/2012/07/10/FFilter</id>
    <content type="html">&lt;p&gt;FFilter is a project I worked on to implement spectral filtering of audio files in Python using some simple FFT libraries. Its sorta neat, give it a look!&lt;/p&gt;
 
@@ -75,9 +75,11 @@
  <entry>
    <title>BoosterWorks - A Volunteer Scheduling System</title>
    <link href="http://www.sethhochberg.com/blog/2012/06/20/Boosterworks/"/>
-   <updated>2012-06-20T00:00:00-07:00</updated>
+   <updated>2012-06-20T00:00:00-04:00</updated>
    <id>http://www.sethhochberg.com/blog/2012/06/20/Boosterworks</id>
    <content type="html">&lt;h2 id='about'&gt;About:&lt;/h2&gt;
+
+&lt;p&gt;(This post references an old version of Boosterworks - a complete rewrite of the software, using Ruby on Rails, is underway prior to a real public launch as a SaaS product.)&lt;/p&gt;
 
 &lt;p&gt;BoosterWorks is a piece of software that is designed to help parent booster organizations schedule volunteers for their events more efficiently, while increasing accountability and reducing event coordinator workloads. Currently, BoosterWorks is entering its second year of use with the Tarpon Springs High School Band Boosters.&lt;/p&gt;
 
